@@ -1,0 +1,21 @@
+[submodule "site/pack/colorschemes/start/gruvbox"]
+	path = site/pack/colorschemes/start/gruvbox
+	url = https://github.com/morhetz/gruvbox.git
+[submodule "site/pack/languages/opt/typescript-vim"]
+	path = site/pack/languages/opt/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim.git
+[submodule "site/pack/languages/opt/vim-jsx"]
+	path = site/pack/languages/opt/vim-jsx
+	url = https://github.com/mxw/vim-jsx.git
+[submodule "site/pack/languages/opt/vim-jsx-typescript"]
+	path = site/pack/languages/opt/vim-jsx-typescript
+	url = https://github.com/peitalin/vim-jsx-typescript.git
+[submodule "site/pack/languages/opt/vim-solidity"]
+	path = site/pack/languages/opt/vim-solidity
+	url = https://github.com/tomlion/vim-solidity.git
+[submodule "site/pack/plugins/start/fzf.vim"]
+	path = site/pack/plugins/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule "site/pack/plugins/start/vim-airline"]
+	path = site/pack/plugins/start/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
