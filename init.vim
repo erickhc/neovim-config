@@ -129,6 +129,9 @@ nmap <silent> <Leader>cc <Plug>(coc-rename)
 nmap <Leader>cfl <Plug>(coc-codeaction)
 nmap <Leader>cfc <Plug>(coc-fix-current)
 
+" Use K to show documentation in preview window
+nnoremap <Leader>ck :call CocAction('doHover')<CR>
+
 if filereadable(".vimrc")
 	source .vimrc
 endif
