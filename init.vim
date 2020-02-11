@@ -35,6 +35,7 @@ nnoremap <Leader>rw :Rg <C-R><C-W><Cr>
 
 " Window leader maps
 nnoremap <leader>v :vsplit<Cr>
+nnoremap <Leader>s :split<Cr>
 
 " Buffer leader maps
 nnoremap <leader>bn :bnext<Cr>
@@ -64,9 +65,12 @@ set number
 set relativenumber
 set wildignorecase
 
+set shortmess+=wrI
+
 " Search
 set ignorecase
 set smartcase
+set incsearch
 
 " Ergonomics
 inoremap jk <Esc>
@@ -131,6 +135,8 @@ nmap <Leader>cfc <Plug>(coc-fix-current)
 
 " Use K to show documentation in preview window
 nnoremap <Leader>ck :call CocAction('doHover')<CR>
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 if filereadable(".vimrc")
 	source .vimrc
