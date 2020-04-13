@@ -135,8 +135,6 @@ nmap <Leader>cfc <Plug>(coc-fix-current)
 
 " Use K to show documentation in preview window
 nnoremap <Leader>ck :call CocAction('doHover')<CR>
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
 
 if filereadable(".vimrc")
 	source .vimrc
