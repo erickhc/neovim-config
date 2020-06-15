@@ -86,6 +86,7 @@ set undofile
 
 " Typescript support
 autocmd BufNewFile,BufReadPre,FileReadPre *.{tsx,ts} packadd vim-jsx-typescript | packadd typescript-vim | set filetype=typescript.tsx
+autocmd BufNewFile,BufReadPre,FileReadPre *.tig set filetype=tiger
 autocmd BufNewFile,BufReadPre,FileReadPre *.{jsx,js} packadd vim-jsx
 " Solidity support
 autocmd BufNewFile,BufReadPre,FileReadPre *.sol set filetype=solidity
