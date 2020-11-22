@@ -85,16 +85,14 @@ nnoremap <expr> k (v:count > 1 ? 'k' : 'gk')
 set undofile
 
 " Typescript support
-autocmd BufNewFile,BufReadPre,FileReadPre *.{tsx,ts} packadd vim-jsx-typescript | packadd typescript-vim | set filetype=typescript.tsx
+"autocmd BufNewFile,BufReadPre,FileReadPre *.{tsx,ts} packadd vim-jsx-typescript | packadd typescript-vim | set filetype=typescript.tsx
+autocmd Filetype typescript setlocal omnifunc=v:lua.vim.lsp.omnifunc
 autocmd BufNewFile,BufReadPre,FileReadPre *.tig set filetype=tiger
 autocmd BufNewFile,BufReadPre,FileReadPre *.{jsx,js} packadd vim-jsx
 " Solidity support
 autocmd BufNewFile,BufReadPre,FileReadPre *.sol set filetype=solidity
 " Babel support
 autocmd BufNewFile,BufReadPre,FileReadPre .babelrc set filetype=json
-
-" Fuzzy find
-set rtp+=~/.fzf
 
 " FZF
 imap <C-X><C-F> <Plug>(fzf-complete-path)
@@ -113,30 +111,61 @@ autocmd FileType fzf set laststatus=0 noshowmode noruler
 set signcolumn=yes
 set hidden
 
-set updatetime=300
+"set updatetime=300
 
 " Show more info
-set cmdheight=2
+"set cmdheight=2
 set shortmess+=c
 
-inoremap <silent><expr> <c-space> coc#refresh()
+"inoremap <silent><expr> <c-space> coc#refresh()
 
-nmap <silent> <Leader>cd <Plug>(coc-definition)
-nmap <silent> <Leader>cy <Plug>(coc-type-definition)
-nmap <silent> <Leader>ci <Plug>(coc-implementation)
-nmap <silent> <Leader>cr <Plug>(coc-references)
+"nmap <silent> <Leader>cd <Plug>(coc-definition)
+"nmap <silent> <Leader>cy <Plug>(coc-type-definition)
+"nmap <silent> <Leader>ci <Plug>(coc-implementation)
+"nmap <silent> <Leader>cr <Plug>(coc-references)
 
-nmap <silent> <Leader>cp <Plug>(coc-diagnostic-prev)
-nmap <silent> <Leader>cn <Plug>(coc-diagnostic-next)
+"nmap <silent> <Leader>cp <Plug>(coc-diagnostic-prev)
+"nmap <silent> <Leader>cn <Plug>(coc-diagnostic-next)
 
-nmap <silent> <Leader>cc <Plug>(coc-rename)
+"nmap <silent> <Leader>cc <Plug>(coc-rename)
 
-nmap <Leader>cfl <Plug>(coc-codeaction)
-nmap <Leader>cfc <Plug>(coc-fix-current)
+"nmap <Leader>cfl <Plug>(coc-codeaction)
+"nmap <Leader>cfc <Plug>(coc-fix-current)
 
 " Use K to show documentation in preview window
-nnoremap <Leader>ck :call CocAction('doHover')<CR>
+"nnoremap <Leader>ck :call CocAction('doHover')<CR>
 
 if filereadable(".vimrc")
 	source .vimrc
 endif
+
+let g:python3_host_prog="/usr/bin/python3"
+
+" LSP
+
+lua << EOF
+local lspconfig = require'lspconfig'
+
+lspconfig.rust_analyzer.setup{
+	cmd = { "rust-analyzer" },
+	filetypes = { "rust" },
+	root_dir = lspconfig.util.root_pattern("Cargo.toml", "rust-project.json"),
+	settings = {
+		["rust-analyzer"] = {},
+	},
+}
+
+lspconfig.tsserver.setup{
+	cmd = { "typescript-language-server", "--stdio" },
+	filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+	root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+}
+EOF
+
+nnoremap <silent> <Leader>cd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <Leader>cD <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <Leader>ck <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <Leader>cr <cmd>lua vim.lsp.buf.references()<CR>
+inoremap <silent> <C-Space> <C-X><C-O>
+nnoremap <silent> <Leader>cr <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> <Leader>cfc <cmd>lua vim.lsp.buf.code_action()<CR>
